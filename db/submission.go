@@ -11,4 +11,6 @@ type Submission struct {
 
 	FileURL string `json:"file_url"`
 	Status  string `json:"status"`
+
+	UserID uint // Relation
 }
