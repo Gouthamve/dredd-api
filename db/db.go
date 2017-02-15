@@ -15,5 +15,12 @@ func init() {
 		panic(err)
 	}
 
-	Conn.CreateTable(&Challenge{}, &Submission{}, &User{}, &Ticket{})
+	Conn.CreateTable(
+		&Challenge{},
+		&Submission{},
+		&User{},
+		&Ticket{},
+		&Limits{},
+		&Testcase{},
+	)
 }

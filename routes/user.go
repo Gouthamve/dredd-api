@@ -29,7 +29,11 @@ func SaveUser(c echo.Context) error {
 
 // GetUser gets the user
 func GetUser(c echo.Context) error {
-	return nil
+	userID := c.Get("user").(string)
+	u := db.User{}
+
+	db.Conn.Where("id = ?", userID).First(&u)
+	return c.JSON(http.StatusOK, u)
 }
 
 // UpdateUser updates the user

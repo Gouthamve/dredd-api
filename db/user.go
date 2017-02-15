@@ -3,6 +3,8 @@ package db
 import (
 	"time"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/juju/errors"
 )
 
@@ -18,12 +20,25 @@ type User struct {
 	Password string `json:"password"`
 
 	Submissions []Submission `json:"submissions"`
-	Ticket      Ticket       `json:"ticket"`
+	Ticket      Ticket       `json:"ticket,omitempty"`
+
+	IsAdmin bool `json:"-"`
 }
 
 // BeforeSave is the pre-callback
 func (u *User) BeforeSave() error {
 	return validateUser(*u)
+}
+
+// BeforeCreate is the before create callback
+func (u *User) BeforeCreate() error {
+	pass, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return nil
+	}
+
+	u.Password = string(pass)
+	return nil
 }
 
 func validateUser(u User) error {
@@ -33,5 +48,17 @@ func validateUser(u User) error {
 	if u.Email == "" {
 		return errors.New("user: email cannot be empty")
 	}
+
+	if u.Password == "" {
+		return errors.New("user: password cannot be empty")
+	}
+
+	return nil
+}
+
+// AfterFind is the after find callback
+func (u *User) AfterFind() error {
+	u.Password = ""
+
 	return nil
 }

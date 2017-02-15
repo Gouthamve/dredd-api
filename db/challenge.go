@@ -1,9 +1,8 @@
 package db
 
 import (
+	"errors"
 	"time"
-
-	"github.com/gouthamve/dredd"
 )
 
 // Challenge is the challenge model
@@ -13,7 +12,27 @@ type Challenge struct {
 	CreatedAt time.Time `json:"-"`
 	UpdatedAt time.Time `json:"-"`
 
-	Question  string           `json:"question"`
-	Testcases []dredd.Testcase `json:"testcases"`
-	Limits    dredd.Limits     `json:"limits"`
+	Question  string     `json:"question"`
+	Testcases []Testcase `json:"testcases"`
+	Limits    Limits     `json:"limits"`
+}
+
+// BeforeSave is the pre-callback
+func (ch *Challenge) BeforeSave() error {
+	return validateChallenge(*ch)
+}
+
+func validateChallenge(ch Challenge) error {
+	if ch.Question == "" {
+		return errors.New("challenge: question cannot be empty")
+	}
+	if ch.Testcases == nil || len(ch.Testcases) == 0 {
+		return errors.New("challenge: testcases cannot be empty")
+	}
+
+	if ch.Limits == (Limits{}) {
+		return errors.New("challenge: limits cannot be empty")
+	}
+
+	return nil
 }
