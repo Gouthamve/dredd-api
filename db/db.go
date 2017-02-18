@@ -10,7 +10,7 @@ var Conn *gorm.DB
 func init() {
 	var err error
 
-	Conn, err = gorm.Open("postgres", "host=localhost user=goutham dbname=gopherhack sslmode=disable password=getten1*")
+	Conn, err = gorm.Open("postgres", "host=localhost user=goutham dbname=dredd sslmode=disable password=getten1*")
 	if err != nil {
 		panic(err)
 	}
@@ -19,7 +19,6 @@ func init() {
 		&Challenge{},
 		&Submission{},
 		&User{},
-		&Ticket{},
 		&Limits{},
 		&Testcase{},
 	)

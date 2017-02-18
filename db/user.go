@@ -20,7 +20,6 @@ type User struct {
 	Password string `json:"password"`
 
 	Submissions []Submission `json:"submissions"`
-	Ticket      Ticket       `json:"ticket,omitempty"`
 
 	IsAdmin bool `json:"-"`
 }

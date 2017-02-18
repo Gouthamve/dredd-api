@@ -3,7 +3,7 @@ package mware
 import (
 	"net/http"
 
-	"github.com/gouthamve/gopherhack/db"
+	"github.com/gouthamve/dredd-api/db"
 	"github.com/labstack/echo"
 )
 

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gouthamve/gopherhack/db"
-	"github.com/gouthamve/gopherhack/lib/fileserver"
+	"github.com/gouthamve/dredd-api/db"
+	"github.com/gouthamve/dredd-api/lib/fileserver"
 	"github.com/juju/errors"
 	"github.com/labstack/echo"
 )

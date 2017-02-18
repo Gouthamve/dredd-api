@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gouthamve/gopherhack/routes"
-	"github.com/gouthamve/gopherhack/routes/mware"
+	"github.com/gouthamve/dredd-api/routes"
+	"github.com/gouthamve/dredd-api/routes/mware"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/spf13/viper"
@@ -13,7 +13,7 @@ import (
 
 func main() {
 	// setup
-	viper.SetEnvPrefix("GH")
+	viper.SetEnvPrefix("DREDD")
 	viper.AutomaticEnv()
 	replacer := strings.NewReplacer("-", "_")
 	viper.SetEnvKeyReplacer(replacer)
