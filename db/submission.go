@@ -13,4 +13,7 @@ type Submission struct {
 	Status  string `json:"status"`
 
 	UserID uint // Relation
+
+	Challenge   Challenge `json:"challenge"`
+	ChallengeID uint      // Relation
 }

@@ -15,6 +15,8 @@ type Challenge struct {
 	Question  string     `json:"question"`
 	Testcases []Testcase `json:"testcases"`
 	Limits    Limits     `json:"limits"`
+
+	Submissions []Submission `json:"submissions,omitempty"`
 }
 
 // BeforeSave is the pre-callback

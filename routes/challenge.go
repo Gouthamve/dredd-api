@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gouthamve/dredd-api/db"
+	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
 )
 
@@ -34,7 +35,11 @@ func GetChallenge(c echo.Context) error {
 	ch := db.Challenge{
 		Testcases: make([]db.Testcase, 0),
 	}
-	if err := db.Conn.First(&ch).Error; err != nil {
+	if err := db.Conn.Where("id = ?", c.Param("id")).First(&ch).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return c.NoContent(http.StatusNotFound)
+		}
+
 		return err
 	}
 

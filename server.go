@@ -31,9 +31,9 @@ func main() {
 
 	// challenge routes
 	e.POST("/challenges", routes.SaveChallenge)
-	e.GET("/challenges", routes.GetChallenge)
+	e.GET("/challenges/:id", routes.GetChallenge)
 
 	// submission routes
-	e.POST("/submissions", routes.SaveSubmission, mware.Auth)
+	e.POST("/challenges/:id/submit", routes.SaveSubmission, mware.Auth)
 	e.Logger.Fatal(e.Start(":1323"))
 }
